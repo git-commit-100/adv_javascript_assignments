@@ -30,19 +30,17 @@ const getCookieByName = (name) => {
 const setCookie = (name, value, days = 7) => {
   // setting days to seconds as max-age requires seconds
   let maxAgeInSeconds = +days * 24 * 60 * 60;
-  // encoding cookie name and value
-  let encodedName = encodeURIComponent(name);
+  // encoding value
   let encodedValue = encodeURIComponent(value);
   // setting a cookie
-  document.cookie = `${encodedName}=${encodedValue};max-age=${maxAgeInSeconds};path=/`;
+  document.cookie = `${name}=${encodedValue};max-age=${maxAgeInSeconds};path=/`;
 };
 
 const deleteCookie = (name) => {
   let { cookieKey, cookieValue } = findACookie(name);
-  let encodedName = encodeURIComponent(cookieKey);
   let encodedValue = encodeURIComponent(cookieValue);
   // setting max-age to 0 or -ve deletes cookie
-  document.cookie = `${encodedName}=${encodedValue};max-age=0;path=/`;
+  document.cookie = `${cookieKey}=${encodedValue};max-age=0;path=/`;
 };
 
 const goToPage = (url) => {
