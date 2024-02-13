@@ -7,12 +7,10 @@ let STUDENTS = [];
 const displayScores = (isSort = false) => {
   if (STUDENTS.length > 0) {
     // displaying to text box
-    let STUDENTS_ARRAY = [...STUDENTS];
     let displayString = "";
 
     if (isSort) {
       // sort by last name
-      let sortedArr = [...STUDENTS];
 
       // comparator function
       const sortLastName = (a, b) => {
@@ -31,11 +29,10 @@ const displayScores = (isSort = false) => {
       };
 
       // sorting on custom comparator
-      sortedArr.sort(sortLastName);
-      STUDENTS_ARRAY = [...sortedArr];
+      STUDENTS.sort(sortLastName);
     }
     // append to DOM
-    for (let data of STUDENTS_ARRAY) {
+    for (let data of STUDENTS) {
       let dataArr = data.split("~"); // will have 3 elements
       // formatting string in format specififed
       displayString += `${dataArr[1]}, ${dataArr[0]}: ${dataArr[2]}\n`;
