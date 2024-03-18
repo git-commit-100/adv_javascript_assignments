@@ -4,6 +4,7 @@ import { padSingleDigit } from "./library_clock.js";
 
 export const createStopwatch = (minuteSpan, secondSpan, msSpan) => {
   // private state
+  let stopwatchTimer = null;
   let elapsed = { minutes: 0, seconds: 0, milliseconds: 0 };
 
   const tickStopwatch = () => {
@@ -26,18 +27,29 @@ export const createStopwatch = (minuteSpan, secondSpan, msSpan) => {
   // return object with public methods
   return {
     start() {
-      tickStopwatch();
-      return setInterval(tickStopwatch, 10);
+      /* 
+        clicking twice on start previously keeps the timer running 
+        even on clicking stop or reset. Thus checking if timer already
+        exists, do nothing on start() 
+        */
+      if (!stopwatchTimer) {
+        tickStopwatch();
+        stopwatchTimer = setInterval(tickStopwatch, 10);
+      }
     },
-    stop(timer) {
-      clearInterval(timer);
+    stop() {
+      if (stopwatchTimer) {
+        clearInterval(stopwatchTimer);
+        stopwatchTimer = null; // resetting timer to null
+      }
     },
     reset() {
-      clearInterval();
+      clearInterval(stopwatchTimer);
       elapsed = { minutes: 0, seconds: 0, milliseconds: 0 };
       minuteSpan.text("00");
       secondSpan.text("00");
       msSpan.text("000");
+      stopwatchTimer = null; // resetting timer to null
     },
   };
 };

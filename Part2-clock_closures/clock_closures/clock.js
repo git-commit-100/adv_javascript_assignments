@@ -3,9 +3,6 @@
 import { createClock } from "./library_clock.js";
 import { createStopwatch } from "./library_stopwatch.js";
 
-//global stop watch timer variable
-let stopwatchTimer = null;
-
 $(document).ready(function () {
   const clock = createClock(
     $("#hours"),
@@ -22,20 +19,14 @@ $(document).ready(function () {
   );
 
   $("#start").click(() => {
-    // do first tick of stop watch and then set interval timer to tick
-    // stop watch every 10 milliseconds. Store timer object in stopwatchTimer
-    // variable so next two functions can stop timer.
-    stopwatchTimer = stopwatch.start();
+    stopwatch.start();
   });
 
   $("#stop").click(() => {
-    // stop timer
-    stopwatch.stop(stopwatchTimer);
+    stopwatch.stop();
   });
 
   $("#reset").click(() => {
-    // stop timer and reset
-    stopwatch.stop(stopwatchTimer);
     stopwatch.reset();
   });
 }); // end ready()
