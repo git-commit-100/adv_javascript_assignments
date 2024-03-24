@@ -14,15 +14,25 @@ div {
 }
 label {
     display: inline-block;
-    width: 10em;
+    width: 8em;
 }
 input {
-    margin-left: 1em;
     margin-right: 0.5em;
 }
-span {
+table {
+    margin-bottom: 1em;
+}
+td, th {
+    min-width: 7em;
+    text-align: left;
+}
+img {
+    width: 200px;
+    margin-right: 0.5em;
+}
+.error {
     color: red;
 }
-#trips {
-    float: right;
+.hide {
+    display: none;
 }
